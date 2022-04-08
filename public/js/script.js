@@ -4,6 +4,7 @@ var addMinimizeAction       = document.getElementById("addMinimizeAction");
 var restoreDefaultAction    = document.getElementById("restoreDefaultAction");
 var mainAction              = document.getElementById("mainAction");
 var errorWithClosePosition  = document.getElementById("errorWithClosePosition");
+var logoImg                 = document.getElementById("logoImg");
 
     // Asynchronous loading to retrieve different variables as soon as possible
     (async () => {
@@ -23,8 +24,10 @@ var errorWithClosePosition  = document.getElementById("errorWithClosePosition");
             let res = await getButtonsLayout();
             if (res) {
                 restoreDefaultAction.classList.remove("hide");
+                logoImg.classList.remove("opacity-2");
             } else {
                 addMinimizeAction.classList.remove("hide");
+                logoImg.classList.add("opacity-2");
             }
         }
 
@@ -43,6 +46,7 @@ function add() {
     if (res) {
         addMinimizeAction.classList.add("hide");
         restoreDefaultAction.classList.remove("hide");
+        logoImg.classList.remove("opacity-2");
     }
 }
 function restore() {
@@ -50,5 +54,6 @@ function restore() {
     if (res) {
         addMinimizeAction.classList.remove("hide");
         restoreDefaultAction.classList.add("hide");
+        logoImg.classList.add("opacity-2");
     }
 }

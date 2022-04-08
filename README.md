@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/Arnwaltur/eos-minimize-button/main/eos-minimize-button.png)
+![Logo](https://raw.githubusercontent.com/Arnwaltur/eos-minimize-button/main/public/img/eos-minimize-button.png)
 
 ## License
 GNU General Public License v3.0

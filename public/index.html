@@ -9,11 +9,16 @@
 <body>
     <h1>Should works fine with Elementary OS 6</h1>
 
-    <div id="mainAction">
-        <center>
-            <button id="addMinimizeAction" class="hide" onclick="add()">Add Minimize Button</button>
-            <button id="restoreDefaultAction" class="hide" onclick="restore()">Remove Minimize Button</button>
-        </center>
+    <div id="mainAction" class="main">
+        <div class="column col-3">
+            <img src="img/eos-minimize-button.png" id="logoImg" class="minimize-button" />
+        </div>
+        <div class="column col-7">
+            <center>
+                <button id="addMinimizeAction" class="hide" onclick="add()">Add Minimize Button</button>
+                <button id="restoreDefaultAction" class="hide" onclick="restore()">Remove Minimize Button</button>
+            </center>
+        </div>
     </div>
     <p id="errorWithClosePosition" class="hide">
         <i>But I don't detect close button on left side like on Elementary OS.</i>
