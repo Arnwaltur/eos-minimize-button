@@ -1,0 +1,19 @@
+body {
+    padding: 0.5em;
+}
+h1 {
+    color: grey;
+    font-size: 1em;
+    font-weight: lighter;
+}
+button {
+    font-size: 1em;
+    padding: 0.5em;
+    margin-top: 1.5em;
+}
+.hide {
+    display: none;
+}
+#errorWithClosePosition i {
+    color: red;
+}
