@@ -10,7 +10,6 @@ Simple desktop app that add or remove minimize button on eOS 6. Made with Golang
 ## Or copy/paste this one-liner command in terminal
 ```shell
 wget https://github.com/Arnwaltur/eos-minimize-button/raw/main/build/eos-minimize-button-x86_64.AppImage && chmod +x eos-minimize-button-x86_64.AppImage && ./eos-minimize-button-x86_64.AppImage
-foo
 ```
 
 ## License
