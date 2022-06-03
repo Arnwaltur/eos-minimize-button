@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16"
+   width="16"
+   version="1.1"
+   id="svg6"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+
+  <g
+     color="#e8e8e8"
+     transform="matrix(1.3380505,0,0,1.3380505,-956.76297,-212.8069)"
+     id="g4">
+    <path
+       d="m 720.97,163.556 2.53,-2.556 1.5,1.5 -2.598,2.487 2.598,2.513 -1.5,1.5 -2.512,-2.599 L 718.5,169 717,167.5 719.586,165 717,162.5 718.5,161 Z"
+       fill="#444"
+       overflow="visible"
+       style="marker:none"
+       id="path2" />
+  </g>
+</svg>

@@ -25,7 +25,25 @@ gsettings set org.gnome.desktop.wm.preferences button-layout "close:maximize"
 gsettings set org.pantheon.desktop.gala.appearance button-layout "close:maximize"
 gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/EnablePrimaryPaste': <1>, 'Gtk/DecorationLayout': <'close:maximize,menu'>}"
 `
-var appTitle = `Elementary OS Minimize Button`
+
+var applyMacButtonsScript = `
+gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:"
+gsettings set org.pantheon.desktop.gala.appearance button-layout "close,minimize,maximize:"
+gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/EnablePrimaryPaste': <1>, 'Gtk/DecorationLayout': <'close,minimize,maximize:menu'>}"
+`
+
+var applyWinButtonsScript = `
+gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+gsettings set org.pantheon.desktop.gala.appearance button-layout ":minimize,maximize,close"
+gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/EnablePrimaryPaste': <1>, 'Gtk/DecorationLayout': <':menu,minimize,maximize,close'>}"
+`
+
+var applyWtfButtonsScript = `
+gsettings set org.gnome.desktop.wm.preferences button-layout ""
+gsettings set org.pantheon.desktop.gala.appearance button-layout ""
+gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/EnablePrimaryPaste': <1>, 'Gtk/DecorationLayout': <':menue'>}"
+`
+var appTitle = `Elementary OS Buttons`
 
 func main() {
 	// Serveur à partir du système de fichiers intégré
@@ -48,47 +66,53 @@ func main() {
 	defer w.Destroy()
 
 	w.SetTitle(appTitle)
-	w.SetSize(480, 160, webview.HintNone)
+	w.SetSize(480, 480, webview.HintNone)
 
-	w.Bind("checkCloseButtonPosition", checkCloseButtonPosition)
-	w.Bind("getButtonsLayout", getButtonsLayout)
+	w.Bind("checkButtonsStyle", checkButtonsStyle)
 	w.Bind("addMinimizeButton", addMinimizeButton)
 	w.Bind("restoreButtons", restoreButtons)
+	w.Bind("applyMacButtons", applyMacButtons)
+	w.Bind("applyWinButtons", applyWinButtons)
+	w.Bind("applyWtfButtons", applyWtfButtons)
 
 	w.Navigate("http://localhost:" + fmt.Sprint(port) + "/public/")
 	w.Run()
 }
 
-func checkCloseButtonPosition() (bool) {
+func checkButtonsStyle() (r string) {
     out, err := exec.Command("gsettings", "get", "org.gnome.desktop.wm.preferences", "button-layout").Output()
+    r = "unknown"
 
     if err != nil {
     	notification(appTitle, "Unable to execute gsettings command")
         panic(err)
     }
 
-    res := strings.Contains(string(out), "close:")
-    if res {
-    	return true
+    eos := strings.Contains(string(out), "close:maximize")
+    if eos {
+    	r = "eos"
     }
 
-	return false
-}
-
-func getButtonsLayout() (bool) {
-    out, err := exec.Command("gsettings", "get", "org.gnome.desktop.wm.preferences", "button-layout").Output()
-
-    if err != nil {
-    	notification(appTitle, "Unable to execute gsettings command")
-        panic(err)
+    eosmin := strings.Contains(string(out), "close:minimize,maximize")
+    if eosmin {
+    	r = "eos+min"
     }
 
-    res := strings.Contains(string(out), "minimize")
-    if res {
-    	return true
+    mac := strings.Contains(string(out), "close,minimize,maximize:")
+    if mac {
+    	r = "mac"
     }
 
-	return false
+    win := strings.Contains(string(out), ":minimize,maximize,close")
+    if win {
+    	r = "win"
+    }
+
+    if len(strings.TrimSpace(string(out))) == 2 {
+    	r = "wtf"
+    }
+
+	return
 }
 
 func addMinimizeButton() (bool) {
@@ -114,11 +138,57 @@ func restoreButtons() (bool) {
     e := c.Run()
     if e != nil {
         fmt.Println(e)
-        notification(appTitle, "Unable to remove button")
+        notification(appTitle, "Unable to restore default style")
         return false
     }
 
-	notification(appTitle, "Succesfully removed minimize button")
+	return true
+}
+
+func applyMacButtons() (bool) {
+    c := exec.Command("bash")
+    c.Stdin = strings.NewReader(applyMacButtonsScript)
+
+    e := c.Run()
+    if e != nil {
+        fmt.Println(e)
+        notification(appTitle, "Unable to apply Mac style")
+        return false
+    }
+
+	notification(appTitle, "Succesfully apply Mac style")
+
+	return true
+}
+
+func applyWinButtons() (bool) {
+    c := exec.Command("bash")
+    c.Stdin = strings.NewReader(applyWinButtonsScript)
+
+    e := c.Run()
+    if e != nil {
+        fmt.Println(e)
+        notification(appTitle, "Unable to apply Windows style")
+        return false
+    }
+
+	notification(appTitle, "Succesfully apply Windows style")
+
+	return true
+}
+
+func applyWtfButtons() (bool) {
+    c := exec.Command("bash")
+    c.Stdin = strings.NewReader(applyWtfButtonsScript)
+
+    e := c.Run()
+    if e != nil {
+        fmt.Println(e)
+        notification(appTitle, "Unable to apply Ninja style")
+        return false
+    }
+
+	notification("Yoda", "Try Not. Do or do not, there is no try.")
 
 	return true
 }

@@ -7,22 +7,84 @@
 </head>
 
 <body>
-    <h1>Should works fine with Elementary OS 6</h1>
 
-    <div id="mainAction" class="main">
-        <div class="column col-3">
-            <img src="img/eos-minimize-button.png" id="logoImg" class="minimize-button" />
-        </div>
-        <div class="column col-7">
-            <center>
-                <button id="addMinimizeAction" class="hide" onclick="add()">Add Minimize Button</button>
-                <button id="restoreDefaultAction" class="hide" onclick="restore()">Remove Minimize Button</button>
-            </center>
+    <div class="main">
+        <div class="row">
+            <h1 class="pull-left">Elementary</h1>
+            <button id="addMinimizeAction" class="hide pull-right" onclick="addEosMinimize()">Add Minimize Button</button>
+            <button id="restoreDefaultAction" class="hide pull-right" onclick="setEosDefaultStyle()">Remove Minimize Button</button>
         </div>
     </div>
-    <p id="errorWithClosePosition" class="hide">
-        <i>But I don't detect close button on left side like on Elementary OS.</i>
-    </p>
+    <div id="elementaryIcons" class="main buttons-bar">
+        <div class="column col-1">
+            <img src="img/close.svg" class="icons" />
+        </div>
+        <div class="column col-7">
+        </div>
+        <div class="column col-1">
+            <img src="img/minimize.svg" class="icons" id="eosMinimizeIcon" />
+        </div>
+        <div class="column col-1">
+            <img src="img/maximize.svg" class="icons" />
+        </div>
+    </div>
+
+
+    <div class="main mt-2">
+        <div class="row">
+            <h1 class="pull-left">Mac</h1>
+            <button id="selectMacButtons" class="hide pull-right" onclick="setMacStyle()">Apply Mac Style</button>
+            <button id="restoreDefaultMac" class="hide pull-right" onclick="setEosDefaultStyle()">Remove Mac Style</button>
+        </div>
+    </div>
+    <div id="macIcons" class="main buttons-bar">
+        <div class="column col-1">
+            <img src="img/close.svg" class="icons" />
+        </div>
+        <div class="column col-1">
+            <img src="img/minimize.svg" class="icons" />
+        </div>
+        <div class="column col-1">
+            <img src="img/maximize.svg" class="icons" />
+        </div>
+        <div class="column col-7">
+        </div>
+    </div>
+
+
+    <div class="main mt-2">
+        <div class="row">
+            <h1 class="pull-left">Windows</h1>
+            <button id="selectWinButtons" class="hide pull-right" onclick="setWinStyle()">Apply Windows Style</button>
+            <button id="restoreDefaultWin" class="hide pull-right" onclick="setEosDefaultStyle()">Remove Windows Style</button>
+        </div>
+    </div>
+    <div id="winIcons" class="main buttons-bar">
+        <div class="column col-7">
+        </div>
+        <div class="column col-1">
+            <img src="img/minimize.svg" class="icons" />
+        </div>
+        <div class="column col-1">
+            <img src="img/maximize.svg" class="icons" />
+        </div>
+        <div class="column col-1">
+            <img src="img/close.svg" class="icons" />
+        </div>
+    </div>
+
+
+    <div class="main mt-2">
+        <div class="row">
+            <h1 class="pull-left">Keyboard Jedi</h1>
+            <button id="selectWtfButtons" class="hide pull-right" onclick="setWtfStyle()">Apply Jedi Style</button>
+            <button id="restoreDefaultWtf" class="hide pull-right" onclick="setEosDefaultStyle()">Remove Jedi Style</button>
+        </div>
+    </div>
+    <div id="wtfIcons" class="main buttons-bar">
+        <div class="column col-10">
+        </div>
+    </div>
 
     <script type="text/javascript" src="js/script.js"></script>
 </body>

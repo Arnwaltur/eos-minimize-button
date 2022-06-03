@@ -1,5 +1,5 @@
-# Elementary OS Minimize Button
-![Logo](https://raw.githubusercontent.com/Arnwaltur/eos-minimize-button/main/public/img/eos-minimize-button.png)
+# Elementary OS Buttons
+![Demo](https://raw.githubusercontent.com/Arnwaltur/eos-minimize-button/main/demo/elementary-buttons.gif)
 
 ## Description
 Simple desktop app that add or remove minimize button on eOS 6. Made with Golang and Webview.
